@@ -51,10 +51,11 @@ func stage2Login(server string, customUser string) (*ssh.Client, string, error) 
 	var users []string
 
 	if customUser != "" {
-		users = []string{customUser}
+		users = append(users, customUser)
 	} else {
-		users = []string{"root", "sidekick"}
+		users = append(users, "root")
 	}
+	users = append(users, "sidekick")
 
 	for _, user := range users {
 		client, err := utils.Login(server, user)
